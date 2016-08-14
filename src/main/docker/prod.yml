@@ -1,0 +1,10 @@
+registration-postgresql:
+  container_name: registration-postgresql
+  image: postgres:9.4.5
+  # volumes:
+  #   - ~/volumes/jhipster/registration/postgresql/:/var/lib/postgresql/
+  environment:
+    - POSTGRES_USER=registration
+    - POSTGRES_PASSWORD=
+  ports:
+    - "5432:5432"

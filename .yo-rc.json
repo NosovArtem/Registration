@@ -1,0 +1,24 @@
+{
+  "generator-jhipster": {
+    "baseName": "registration",
+    "packageName": "com.registration",
+    "packageFolder": "com/registration",
+    "authenticationType": "session",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "no",
+    "useSass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "enableTranslation": true,
+    "enableSocialSignIn": false,
+    "rememberMeKey": "b2b8e761e17212ccb83666139f2d7aba3a99dcca",
+    "testFrameworks": [
+      "gatling"
+    ]
+  }
+}
