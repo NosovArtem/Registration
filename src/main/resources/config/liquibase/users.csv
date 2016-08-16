@@ -2,8 +2,11 @@ id;login;password_hash;first_name;last_name;email;activated;lang_key;created_by
 1;system;$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG;System;System;system@localhost;true;en;system
 2;anonymousUser;$2a$10$j8S5d7Sr7.8VTOYNviDPOeWX8KcYILUVJBsYV83Y5NtECayypx9lO;Anonymous;User;anonymous@localhost;true;en;system
 3;admin;$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC;Administrator;Administrator;admin@localhost;true;en;system
-4;user;$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K;User;User;user@localhost;true;en;system
-5;doctor1;$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC;Administrator;Administrator;admin1@localhost;true;en;system
-6;doctor2;$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC;Administrator;Administrator;admin2@localhost;true;en;system
-7;doctor3;$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC;Administrator;Administrator;admin3@localhost;true;en;system
-8;doctor4;$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC;Administrator;Administrator;admin4@localhost;true;en;system
+4;user1;$2a$10$qVbkvUo0kCtMiFWxIMl75eOVnjkibSDxLVc6fzm2/IVFf4ifEXCJy;User1;User1;user1@localhost;true;en;system
+5;user2;$2a$10$IWgv5wgavRqbghl.hLCK8euRqwa0hEw5TQfHiOIGKR1NqfwRWZsa6;User2;User2;user2@localhost;true;en;system
+6;user3;$2a$10$q9oLdWLoeGFVLttcGB1hkOFv97WHy3KGFfLm2uKCj05tHnm0Jqbja;User3;User3;user3@localhost;true;en;system
+7;doctor1;$2a$10$GYGMueRPVFiKvHd2FNwTZeKIPU1DKFb2281heUZrLhSPBCZd.IXz2;doctor1;doctor1;admin1@localhost;true;en;system
+8;doctor2;$2a$10$4GGUjp9Kr8QBjUaUPbAe9O640EC4SEHDxXbg9nukmaEIGlOqQOquG;doctor2;doctor2;admin2@localhost;true;en;system
+9;doctor3;$2a$10$Hph5TD9IQER9ffNav2XyTe8MnhVPw/UGCSiFoZzBKdAyAkvRZo1B.;doctor3;doctor3;admin3@localhost;true;en;system
+10;doctor4;$2a$10$WoWMt.5KLttNKcmhRIjA7OWURMPl5M4RFCrhCbXTgd4VGQoYYanD.;doctor4;doctor4;admin4@localhost;true;en;system
+11;doctor5;$2a$10$WSmLw81t5wDEpe8CnhwiPejQ7eIEZ7ZXNMMbKpvZmNJEraQhu9J1q;doctor5;doctor5;admin5@localhost;true;en;system
