@@ -1,0 +1,10 @@
+{
+    "registrationApp": {
+        "scheduleDoctor" : {
+            "home": {
+                "title": "To schedule doctor"
+            }
+
+        }
+    }
+}
