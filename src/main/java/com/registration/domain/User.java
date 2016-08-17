@@ -10,9 +10,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
-import java.time.ZonedDateTime;
 
 /**
  * A user.
@@ -34,8 +34,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @JsonIgnore
     @NotNull
-    @Size(min = 60, max = 60) 
-    @Column(name = "password_hash",length = 60)
+    @Size(min = 60, max = 60)
+    @Column(name = "password_hash", length = 60)
     private String password;
 
     @Size(max = 50)
@@ -83,6 +83,17 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PersistentToken> persistentTokens = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY)
+    Set<Event> events = new HashSet<>();
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
 
     public Long getId() {
         return id;
@@ -157,11 +168,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
     }
 
     public ZonedDateTime getResetDate() {
-       return resetDate;
+        return resetDate;
     }
 
     public void setResetDate(ZonedDateTime resetDate) {
-       this.resetDate = resetDate;
+        this.resetDate = resetDate;
     }
 
     public String getLangKey() {
@@ -199,11 +210,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
         User user = (User) o;
 
-        if (!login.equals(user.login)) {
-            return false;
-        }
+        return login.equals(user.login);
 
-        return true;
     }
 
     @Override
