@@ -1,11 +1,10 @@
 package com.registration.repository;
 
 import com.registration.domain.User;
-
-import java.time.ZonedDateTime;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +24,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneByLogin(String login);
 
     Optional<User> findOneById(Long userId);
+
+    @Query("SELECT u FROM User AS u JOIN u.authorities AS a WHERE a.name = 'ROLE_DOCTOR'")
+    List<User> findUsersLoginDoctor();
 
     @Override
     void delete(User t);

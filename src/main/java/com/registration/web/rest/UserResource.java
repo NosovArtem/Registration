@@ -9,7 +9,6 @@ import com.registration.security.AuthoritiesConstants;
 import com.registration.service.MailService;
 import com.registration.service.UserService;
 import com.registration.web.rest.dto.ManagedUserDTO;
-import com.registration.web.rest.dto.UserDTO;
 import com.registration.web.rest.util.HeaderUtil;
 import com.registration.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -25,15 +24,17 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 import java.net.URISyntaxException;
-import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
  * REST controller for managing users.
- *
+ * <p/>
  * <p>This class accesses the User entity, and needs to fetch its collection of authorities.</p>
  * <p>
  * For a normal use-case, it would be better to have an eager relationship between User and Authority,
@@ -100,14 +101,14 @@ public class UserResource {
         } else {
             User newUser = userService.createUser(managedUserDTO);
             String baseUrl = request.getScheme() + // "http"
-            "://" +                                // "://"
-            request.getServerName() +              // "myhost"
-            ":" +                                  // ":"
-            request.getServerPort() +              // "80"
-            request.getContextPath();              // "/myContextPath" or "" if deployed in root context
+                "://" +                                // "://"
+                request.getServerName() +              // "myhost"
+                ":" +                                  // ":"
+                request.getServerPort() +              // "80"
+                request.getContextPath();              // "/myContextPath" or "" if deployed in root context
             mailService.sendCreationEmail(newUser, baseUrl);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
-                .headers(HeaderUtil.createAlert( "user-management.created", newUser.getLogin()))
+                .headers(HeaderUtil.createAlert("user-management.created", newUser.getLogin()))
                 .body(newUser);
         }
     }
@@ -182,10 +183,21 @@ public class UserResource {
     public ResponseEntity<ManagedUserDTO> getUser(@PathVariable String login) {
         log.debug("REST request to get User : {}", login);
         return userService.getUserWithAuthoritiesByLogin(login)
-                .map(ManagedUserDTO::new)
-                .map(managedUserDTO -> new ResponseEntity<>(managedUserDTO, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            .map(ManagedUserDTO::new)
+            .map(managedUserDTO -> new ResponseEntity<>(managedUserDTO, HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    @RequestMapping(value = "/users/doctor",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<User> getListUserDoctor() {
+        log.debug("REST method get list user who role is DOCTOR");
+        List<User> listDoctor = userRepository.findUsersLoginDoctor();
+        return listDoctor;
+    }
+
     /**
      * DELETE  USER :login -> delete the "login" User.
      */
@@ -197,6 +209,6 @@ public class UserResource {
     public ResponseEntity<Void> deleteUser(@PathVariable String login) {
         log.debug("REST request to delete User: {}", login);
         userService.deleteUserInformation(login);
-        return ResponseEntity.ok().headers(HeaderUtil.createAlert( "user-management.deleted", login)).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createAlert("user-management.deleted", login)).build();
     }
 }
