@@ -24,15 +24,26 @@ public class Event {
     private String end;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @NotNull
-    private User user;
+    private User patient;
 
-    public User getUser() {
-        return user;
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User doctor;
+
+    public User getPatient() {
+        return patient;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPatient(User patient) {
+        this.patient = patient;
+    }
+
+    public User getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(User doctor) {
+        this.doctor = doctor;
     }
 
     public Long getId() {
