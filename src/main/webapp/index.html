@@ -25,13 +25,11 @@
         <!--[if lt IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div>
+
         <div ui-view="navbar" ng-cloak=""></div>
         <div class="container">
             <div class="well" ui-view="content"></div>
-
             <div class="footer">
-                <p translate="footer">This is your footer</p>
             </div>
         </div>
 
@@ -155,6 +153,12 @@
     <script src="scripts/components/auth/provider/auth.session.service.js"></script>
     <script src="scripts/app/account/sessions/sessions.js"></script>
     <script src="scripts/app/account/sessions/sessions.controller.js"></script>
+    <script src="scripts/components/entities/listDoctor/listDoctor.service.js"></script>
+    <script src="scripts/app/entities/listDoctor/listDoctor.controller.js"></script>
+    <script src="scripts/app/entities/listDoctor/listDoctor.js"></script>
+    <script src="scripts/app/entities/scheduleDoctor/scheduleDoctor.js"></script>
+    <script src="scripts/app/entities/scheduleDoctor/scheduleDoctor.controller.js"></script>
+    <script src="scripts/components/entities/scheduleDoctor/scheduleDoctor.service.js"></script>
     <!-- endbuild -->
 </body>
 </html>
