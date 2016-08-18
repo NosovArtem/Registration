@@ -1,0 +1,51 @@
+<div>
+    <b class="b-root-list">
+        <h2>To schedule reception doctor  {{doctorLastName}}</h2>
+    </b>
+    <daypilot-calendar id="week" daypilot-config="weekConfig" daypilot-events="events"></daypilot-calendar>
+    <div class="row">
+        <div class="col-sm-4">
+            <daypilot-navigator id="navi" daypilot-config="navigatorConfig"></daypilot-navigator>
+        </div>
+        <div class="col-sm-6">
+            <h2 translate="registrationApp.scheduleDoctor.home.record">record</h2>
+            <b class="b-root-list">
+                <h2>Reception lasts 30 minutes</h2>
+            </b>
+            <div class="modal-body">
+
+                <div id="saveSuccess" class="alert alert-success hide" data-alert="alert">
+                    Successfully saved
+                </div>
+
+                <form class="form-horizontal" name="editForm" role="form" show-validation>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"
+                               for="dateReception">Date of reception</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="data.date"
+                                   id="dateReception" pick-a-date="date" placeholder="Select date of reception" value="{{data.date}}" required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"
+                               for="timeReception">Time of reception</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="data.time"
+                          id="timeReception" pick-a-time="time" placeholder="Select time of reception" value="{{data.time}}" required/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-disabled="editForm.$invalid" class="btn btn-primary" ng-click="saveRecord()">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
