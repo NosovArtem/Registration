@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface EvRepository extends JpaRepository<Event, Long> {
 
-    @Query("SELECT e.id, e.patient.lastName, e.start, e.end, e.doctor.lastName, e.doctor.id FROM Event AS e WHERE e.doctor.id = ?1")
+    @Query("SELECT e.id, e.patient.lastName, e.start_time, e.end_time FROM Event AS e WHERE e.doctor.id = ?1")
     List<Event> findAllEventsForDoctorByIdDoctor(Long user_id);
 }

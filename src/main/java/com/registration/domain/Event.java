@@ -17,11 +17,11 @@ public class Event {
 
     @NotNull
     @Size(min = 1, max = 50)
-    private String start;
+    private String start_time;// timestamp
 
     @NotNull
     @Size(min = 1, max = 50)
-    private String end;
+    private String end_time;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User patient;
@@ -55,18 +55,18 @@ public class Event {
     }
 
     public String getStart() {
-        return start;
+        return start_time;
     }
 
-    public void setStart(String start) {
-        this.start = start;
+    public void setStart(String start_time) {
+        this.start_time = start_time;
     }
 
     public String getEnd() {
-        return end;
+        return end_time;
     }
 
-    public void setEnd(String end) {
-        this.end = end;
+    public void setEnd(String end_time) {
+        this.end_time = end_time;
     }
 }
