@@ -198,6 +198,16 @@ public class UserResource {
         return listDoctor;
     }
 
+    @RequestMapping(value = "/users/doctor/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public User getUserDoctor(@PathVariable Long id) {
+        log.debug("REST method get user who role is DOCTOR");
+       User userDoctor = userRepository.findOneUserDoctorById(id);
+        return userDoctor;
+    }
+
     /**
      * DELETE  USER :login -> delete the "login" User.
      */
