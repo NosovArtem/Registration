@@ -3,12 +3,11 @@ angular.module('registrationApp')
         return $resource('/api/events', {}, {
             'getListEvent': {
                 method: 'GET',
-                url: '/api/events/:id',
+                url: '/api/events/doctor/:id',
                 isArray: true
             },
             createEvent: {
-                method: 'POST',
-                url: 'api/events/create'
+                method: 'POST'
                 }
         });
     });
