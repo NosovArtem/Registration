@@ -8,7 +8,6 @@
             "entities": {
                 "main": "Entities",
                 "listDoctor": "ListDoctor",
-                "scheduleDoctor": "ScheduleDoctor",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -115,6 +114,5 @@
         "userexists": "Login name already used!",
         "emailexists": "E-mail is already in use!",
         "idexists": "A new {{ entityName }} cannot already have an ID"
-    },
-    "footer": "This is your footer"
+    }
 }
