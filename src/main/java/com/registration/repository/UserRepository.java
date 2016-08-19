@@ -28,6 +28,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User AS u JOIN u.authorities AS a WHERE a.name = 'ROLE_DOCTOR'")
     List<User> findUsersLoginDoctor();
 
+    @Query("SELECT u FROM User AS u WHERE u.id = ?1")
+    User findOneUserDoctorById(Long doctorId);
+
     @Override
     void delete(User t);
 
