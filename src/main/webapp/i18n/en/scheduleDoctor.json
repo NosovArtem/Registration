@@ -1,11 +1,10 @@
 {
     "registrationApp": {
-        "scheduleDoctor" : {
+        "scheduleDoctor": {
             "home": {
                 "title": "To schedule doctor",
                 "record": "Select the date and time of reception and click save to see a doctor"
             }
-
         }
     }
 }

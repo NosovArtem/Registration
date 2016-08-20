@@ -8,9 +8,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Spring Data JPA repository for the User entity.
- */
+
 public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findOneByActivationKey(String activationKey);
@@ -28,7 +26,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User AS u JOIN u.authorities AS a WHERE a.name = 'ROLE_DOCTOR'")
     List<User> findUsersLoginDoctor();
 
-    @Query("SELECT u FROM User AS u WHERE u.id = ?1")
+    @Query("SELECT u FROM User AS u JOIN u.authorities AS a WHERE a.name = 'ROLE_DOCTOR' AND u.id = ?1")
     User findOneUserDoctorById(Long doctorId);
 
     @Override

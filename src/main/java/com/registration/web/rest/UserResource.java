@@ -20,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -194,8 +195,7 @@ public class UserResource {
     @Timed
     public List<User> getListUserDoctor() {
         log.debug("REST method get list user who role is DOCTOR");
-        List<User> listDoctor = userRepository.findUsersLoginDoctor();
-        return listDoctor;
+        return userRepository.findUsersLoginDoctor();
     }
 
     @RequestMapping(value = "/users/doctor/{id}",
@@ -203,9 +203,11 @@ public class UserResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public User getUserDoctor(@PathVariable Long id) {
-        log.debug("REST method get user who role is DOCTOR");
-       User userDoctor = userRepository.findOneUserDoctorById(id);
-        return userDoctor;
+        if (userRepository.findOneUserDoctorById(id) == null) {
+            throw new UsernameNotFoundException("UserDoctor not found in the database");
+        }
+        log.debug("REST method get users, who have role DOCTOR");
+        return userRepository.findOneUserDoctorById(id);
     }
 
     /**

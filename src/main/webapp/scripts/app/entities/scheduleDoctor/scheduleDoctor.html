@@ -2,9 +2,8 @@
     <button type="submit"
             ui-sref="listDoctor"
             class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>Back to list doctor</span>
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>Back to the list doctors</span>
     </button>
-
     <b class="b-root-list">
         <h2>To schedule reception doctor {{doctor.lastName}}</h2>
     </b>
@@ -16,8 +15,9 @@
         <div class="col-sm-6">
             <h2 translate="registrationApp.scheduleDoctor.home.record">record</h2>
             <b class="b-root-list">
-                <h2>Reception lasts 30 minutes</h2>
+                <h2>Reception lasts one hour</h2>
             </b>
+            <jh-alert-error></jh-alert-error>
             <div class="modal-body">
                 <form class="form-horizontal" name="editForm" role="form" show-validation>
                     <div class="form-group">
@@ -36,7 +36,8 @@
 
                         <div class="col-sm-10">
                             <input type="text" class="form-control" ng-model="data.time"
-                                   id="timeReception" pick-a-time="time" placeholder="Select time of reception"
+                                   id="timeReception" pick-a-time="time" pick-a-time-options="options"
+                                   placeholder="Select time of reception"
                                    value="{{data.time}}" required/>
                         </div>
                     </div>
