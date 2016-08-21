@@ -24,7 +24,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneById(Long userId);
 
     @Query("SELECT u FROM User AS u JOIN u.authorities AS a WHERE a.name = 'ROLE_DOCTOR'")
-    List<User> findUsersLoginDoctor();
+    List<User> findDoctors();
 
     @Query("SELECT u FROM User AS u JOIN u.authorities AS a WHERE a.name = 'ROLE_DOCTOR' AND u.id = ?1")
     User findOneUserDoctorById(Long doctorId);

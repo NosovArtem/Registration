@@ -195,7 +195,7 @@ public class UserResource {
     @Timed
     public List<User> getListUserDoctor() {
         log.debug("REST method get list user who role is DOCTOR");
-        return userRepository.findUsersLoginDoctor();
+        return userRepository.findDoctors();
     }
 
     @RequestMapping(value = "/users/doctor/{id}",
