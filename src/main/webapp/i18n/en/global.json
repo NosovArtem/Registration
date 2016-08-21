@@ -114,6 +114,7 @@
         "userexists": "Login name already used!",
         "emailexists": "E-mail is already in use!",
         "idexists": "A new {{ entityName }} cannot already have an ID",
-        "timereserved": "This date and time is already taken, choose a different time!"
+        "timereserved": "This date and time is already taken, choose a different time!",
+        "timeinpast": "Time is in the past, choose a different time!"
     }
 }

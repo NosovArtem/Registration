@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.net.URISyntaxException;
+import java.util.Date;
 import java.util.List;
 
 
@@ -39,6 +40,10 @@ public class EventResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<?> postEvent(@RequestBody Event event) throws URISyntaxException {
+        Date d = new Date();
+        if (event.getStart().before(d)) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("scheduleDoctor", "timeinpast", "Time is in the past")).body(null);
+        }
         if (eventRepository.findForMatchTimestamp(event.getStart(), event.getDoctor().getId()) != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("scheduleDoctor", "timereserved", "Time is already reserved")).body(null);
         }

@@ -5,7 +5,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 @Entity
 @Table(name = "event")
@@ -16,12 +18,12 @@ public class Event {
     private Long id;
 
     @NotNull
-    @Size(min = 1, max = 50)
-    private String start_time;// timestamp
+    @Column(name = "start_time")
+    private Date startTime;
 
     @NotNull
-    @Size(min = 1, max = 50)
-    private String end_time;
+    @Column(name = "end_time")
+    private Date endTime;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User patient;
@@ -54,19 +56,32 @@ public class Event {
         this.id = id;
     }
 
-    public String getStart() {
-        return start_time;
+    public Date getStart() {
+        return startTime;
     }
 
-    public void setStart(String start_time) {
-        this.start_time = start_time;
+    public void setStart(Date startTime) {
+        this.startTime = startTime;
     }
 
-    public String getEnd() {
-        return end_time;
+    public Date getEnd() {
+        return endTime;
     }
 
-    public void setEnd(String end_time) {
-        this.end_time = end_time;
+    public void setEnd(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getStartForJS() {
+        SimpleDateFormat momentEvent = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        momentEvent.setTimeZone(TimeZone.getTimeZone("GMT+3:00"));
+        return momentEvent.format(startTime).replace(" ", "T");
+    }
+
+    public String getEndForJS() {
+        SimpleDateFormat momentEvent = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        momentEvent.setTimeZone(TimeZone.getTimeZone("GMT+3:00"));
+        return momentEvent.format(endTime).replace(" ", "T");
+
     }
 }
