@@ -26,8 +26,8 @@ angular.module('registrationApp')
         $scope.LoadAll = function (id) {
             ListDoctor.getUserDoctor({id: id}, function (result) {
                 $scope.doctor = result;
+                $scope.loadEvents(id);
             });
-            $scope.loadEvents(id);
         };
 
         $scope.loadEvents = function (id) {
@@ -37,22 +37,20 @@ angular.module('registrationApp')
                     var patientRecord = {};
                     patientRecord["id"] = result[i].patient.id;
                     patientRecord["text"] = result[i].patient.lastName;
-                    patientRecord["start"] = result[i].start;
-                    patientRecord["end"] = result[i].end;
+                    patientRecord["start"] = result[i].startForJS;
+                    patientRecord["end"] = result[i].endForJS;
                     $scope.events.push(patientRecord);
                 }
             });
         };
 
         $scope.saveRecord = function () {
-            var start = new Date(Date.parse($scope.data.date + ", " + $scope.data.time));
-            $scope.record.start = start.getFullYear().toString() + '-' + ((start.getMonth() + 1).toString()[1] ? (start.getMonth() + 1).toString() : "0" + (start.getMonth() + 1).toString()[0]) + '-' + (start.getDate().toString()[1] ? start.getDate().toString() : "0" + start.getDate().toString()[0]) + 'T' + (start.getHours().toString()[1] ? start.getHours().toString() : "0" + start.getHours().toString()[0]) + ':' + (start.getMinutes().toString()[1] ? start.getMinutes().toString() : "0" + start.getMinutes().toString()[0]) + ':' + (start.getSeconds().toString()[1] ? start.getSeconds().toString() : "0" + start.getSeconds().toString()[0]);
-            var end = new Date(Date.parse($scope.data.date + ", " + $scope.data.time) + 3600000);
-            $scope.record.end = end.getFullYear().toString() + '-' + ((end.getMonth() + 1).toString()[1] ? (end.getMonth() + 1).toString() : "0" + (end.getMonth() + 1).toString()[0]) + '-' + (end.getDate().toString()[1] ? end.getDate().toString() : "0" + end.getDate().toString()[0]) + 'T' + (end.getHours().toString()[1] ? end.getHours().toString() : "0" + end.getHours().toString()[0]) + ':' + (end.getMinutes().toString()[1] ? end.getMinutes().toString() : "0" + end.getMinutes().toString()[0]) + ':' + (end.getSeconds().toString()[1] ? end.getSeconds().toString() : "0" + end.getSeconds().toString()[0]);
+            $scope.record.start = new Date(Date.parse($scope.data.date + ", " + $scope.data.time));
+            $scope.record.end = new Date(Date.parse($scope.data.date + ", " + $scope.data.time) + 3600000);
             $scope.record.doctor = $scope.doctor;
             ScheduleDoctor.createEvent($scope.record, function (result) {
+                $scope.LoadAll($stateParams.id);
             });
-            $scope.LoadAll($stateParams.id);
         };
 
 

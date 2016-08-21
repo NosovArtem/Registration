@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <property name="now" value="now()" dbms="mysql,h2"/>
     <property name="now" value="current_timestamp" dbms="postgresql"/>
@@ -10,115 +9,227 @@
 
     <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
 
-    <changeSet id="00000000000000" author="jhipster" dbms="postgresql,oracle">
-        <createSequence sequenceName="hibernate_sequence" startValue="1000" incrementBy="1"/>
+    <changeSet author="Admin (generated)" id="1471787005144-1">
+        <createSequence sequenceName="event_id_seq"/>
     </changeSet>
-
-    <!--
-        JHipster core tables.
-        The initial schema has the '00000000000001' id, so that it is over-written if we re-generate it.
-    -->
-    <changeSet id="00000000000001" author="jhipster">
-        <createTable tableName="jhi_user">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
-                <constraints primaryKey="true" nullable="false"/>
+    <changeSet author="Admin (generated)" id="1471787005144-2">
+        <createSequence sequenceName="hibernate_sequence"/>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-3">
+        <createSequence sequenceName="jhi_persistent_audit_event_event_id_seq"/>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-4">
+        <createSequence sequenceName="jhi_user_id_seq"/>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-5">
+        <createTable tableName="event">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="eventPK"/>
             </column>
-            <column name="login" type="varchar(50)">
-                <constraints unique="true" nullable="false"/>
-            </column>
-            <column name="password_hash" type="varchar(60)"/>
-            <column name="first_name" type="varchar(50)"/>
-            <column name="last_name" type="varchar(50)"/>
-            <column name="email" type="varchar(100)">
-                <constraints unique="true"/>
-            </column>
-            <column name="activated" type="boolean" valueBoolean="false">
-                <constraints nullable="false" />
-            </column>
-            <column name="lang_key" type="varchar(5)"/>
-            <column name="activation_key" type="varchar(20)"/>
-            <column name="reset_key" type="varchar(20)"/>
-            <column name="created_by" type="varchar(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="created_date" type="timestamp" defaultValueDate="${now}">
-                <constraints nullable="false"/>
-            </column>
-            <column name="reset_date" type="timestamp">
-                <constraints nullable="true"/>
-            </column>
-            <column name="last_modified_by" type="varchar(50)"/>
-            <column name="last_modified_date" type="timestamp"/>
+            <column name="doctor_id" type="BIGINT"/>
+            <column name="patient_id" type="BIGINT"/>
+            <column name="end_time" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="start_time" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
         </createTable>
-
-        <createIndex indexName="idx_user_login"
-            tableName="jhi_user"
-            unique="true">
-            <column name="login" type="varchar(50)"/>
-        </createIndex>
-
-        <createIndex indexName="idx_user_email"
-            tableName="jhi_user"
-            unique="true">
-            <column name="email" type="varchar(100)"/>
-        </createIndex>
-
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-6">
         <createTable tableName="jhi_authority">
-            <column name="name" type="varchar(50)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-        </createTable>
-
-        <createTable tableName="jhi_user_authority">
-            <column name="user_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="authority_name" type="varchar(50)">
+            <column name="name" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-
-        <addPrimaryKey columnNames="user_id, authority_name" tableName="jhi_user_authority"/>
-
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-7">
+        <createTable tableName="jhi_persistent_audit_event">
+            <column autoIncrement="true" name="event_id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="pk_jhi_persistent_audit_event"/>
+            </column>
+            <column name="principal" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="event_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="event_type" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-8">
+        <createTable tableName="jhi_persistent_audit_evt_data">
+            <column name="event_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-9">
         <createTable tableName="jhi_persistent_token">
-            <column name="series" type="varchar(255)">
-                <constraints primaryKey="true" nullable="false"/>
+            <column name="series" type="VARCHAR(255)">
+                <constraints nullable="false"/>
             </column>
-            <column name="user_id" type="bigint"/>
-            <column name="token_value" type="varchar(255)">
-                <constraints nullable="false" />
+            <column name="user_id" type="BIGINT"/>
+            <column name="token_value" type="VARCHAR(255)">
+                <constraints nullable="false"/>
             </column>
             <column name="token_date" type="date"/>
-            <column name="ip_address" type="varchar(39)"/>
-            <column name="user_agent" type="varchar(255)"/>
+            <column name="ip_address" type="VARCHAR(39)"/>
+            <column name="user_agent" type="VARCHAR(255)"/>
         </createTable>
-
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-10">
+        <createTable tableName="jhi_user">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="pk_jhi_user"/>
+            </column>
+            <column name="login" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password_hash" type="VARCHAR(60)"/>
+            <column name="first_name" type="VARCHAR(50)"/>
+            <column name="last_name" type="VARCHAR(50)"/>
+            <column name="email" type="VARCHAR(100)"/>
+            <column name="activated" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lang_key" type="VARCHAR(5)"/>
+            <column name="activation_key" type="VARCHAR(20)"/>
+            <column name="reset_key" type="VARCHAR(20)"/>
+            <column name="created_by" type="VARCHAR(50)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reset_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-11">
+        <createTable tableName="jhi_user_authority">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-12">
+        <addPrimaryKey columnNames="event_id, name"
+                       constraintName="jhi_persistent_audit_evt_data_pkey"
+                       tableName="jhi_persistent_audit_evt_data"/>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-13">
+        <addPrimaryKey columnNames="user_id, authority_name"
+                       constraintName="jhi_user_authority_pkey"
+                       tableName="jhi_user_authority"/>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-14">
+        <addPrimaryKey columnNames="name"
+                       constraintName="pk_jhi_authority"
+                       tableName="jhi_authority"/>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-15">
+        <addPrimaryKey columnNames="series"
+                       constraintName="pk_jhi_persistent_token"
+                       tableName="jhi_persistent_token"/>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-16">
+        <addUniqueConstraint columnNames="email"
+                             constraintName="jhi_user_email_key"
+                             tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-17">
+        <addUniqueConstraint columnNames="login"
+                             constraintName="jhi_user_login_key"
+                             tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-18">
+        <createIndex indexName="idx_persistent_audit_event"
+                     tableName="jhi_persistent_audit_event">
+            <column name="principal"/>
+            <column name="event_date"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-19">
+        <createIndex indexName="idx_persistent_audit_evt_data"
+                     tableName="jhi_persistent_audit_evt_data">
+            <column name="event_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-20">
+        <addForeignKeyConstraint baseColumnNames="doctor_id"
+                                 baseTableName="event"
+                                 constraintName="FK_5djnkfevkuira19msn2rc2oxf"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-21">
+        <addForeignKeyConstraint baseColumnNames="patient_id"
+                                 baseTableName="event"
+                                 constraintName="FK_9848kbetc6v9qm57d727cvbox"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-22">
         <addForeignKeyConstraint baseColumnNames="authority_name"
                                  baseTableName="jhi_user_authority"
                                  constraintName="fk_authority_name"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
                                  referencedColumnNames="name"
                                  referencedTableName="jhi_authority"/>
-
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-23">
+        <addForeignKeyConstraint baseColumnNames="event_id"
+                                 baseTableName="jhi_persistent_audit_evt_data"
+                                 constraintName="fk_evt_pers_audit_evt_data"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="event_id"
+                                 referencedTableName="jhi_persistent_audit_event"/>
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-24">
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="jhi_user_authority"
                                  constraintName="fk_user_id"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
-
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-25">
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="jhi_persistent_token"
                                  constraintName="fk_user_persistent_token"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
-
+    </changeSet>
+    <changeSet author="Admin (generated)" id="1471787005144-26">
         <loadData encoding="UTF-8"
                   file="config/liquibase/users.csv"
                   separator=";"
                   tableName="jhi_user">
-            <column name="activated" type="boolean"/>
-            <column name="created_date" type="timestamp"/>
         </loadData>
-        <dropDefaultValue tableName="jhi_user" columnName="created_date" columnDataType="datetime"/>
 
         <loadData encoding="UTF-8"
                   file="config/liquibase/authorities.csv"
@@ -129,48 +240,5 @@
                   file="config/liquibase/users_authorities.csv"
                   separator=";"
                   tableName="jhi_user_authority"/>
-
-        <createTable tableName="jhi_persistent_audit_event">
-            <column name="event_id" type="bigint" autoIncrement="${autoIncrement}">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="principal" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-            <column name="event_date" type="timestamp"/>
-            <column name="event_type" type="varchar(255)"/>
-        </createTable>
-
-        <createTable tableName="jhi_persistent_audit_evt_data">
-            <column name="event_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="name" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="value" type="varchar(255)"/>
-        </createTable>
-        <addPrimaryKey columnNames="event_id, name" tableName="jhi_persistent_audit_evt_data"/>
-
-        <createIndex indexName="idx_persistent_audit_event"
-                     tableName="jhi_persistent_audit_event"
-                     unique="false">
-            <column name="principal" type="varchar(255)"/>
-            <column name="event_date" type="timestamp"/>
-        </createIndex>
-
-        <createIndex indexName="idx_persistent_audit_evt_data"
-                     tableName="jhi_persistent_audit_evt_data"
-                     unique="false">
-            <column name="event_id" type="bigint"/>
-        </createIndex>
-
-        <addForeignKeyConstraint baseColumnNames="event_id"
-                                 baseTableName="jhi_persistent_audit_evt_data"
-                                 constraintName="fk_evt_pers_audit_evt_data"
-                                 referencedColumnNames="event_id"
-                                 referencedTableName="jhi_persistent_audit_event"/>
-
     </changeSet>
-
 </databaseChangeLog>
