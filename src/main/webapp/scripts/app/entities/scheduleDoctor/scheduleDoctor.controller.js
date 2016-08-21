@@ -36,7 +36,7 @@ angular.module('registrationApp')
                 for (var i = 0; i < result.length; i++) {
                     var patientRecord = {};
                     patientRecord["id"] = result[i].patient.id;
-                    patientRecord["text"] = result[i].patient.lastName;
+                    patientRecord["text"] = result[i].patient.firstName.concat(" ").concat(result[i].patient.lastName);
                     patientRecord["start"] = result[i].startForJS;
                     patientRecord["end"] = result[i].endForJS;
                     $scope.events.push(patientRecord);

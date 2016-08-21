@@ -23,7 +23,7 @@ spring:
         url: jdbc:postgresql://localhost:5432/registration
         name:
         username: registration
-        password:
+        password: qwe
     jpa:
         database-platform: com.registration.domain.util.FixedPostgreSQL82Dialect
         database: POSTGRESQL

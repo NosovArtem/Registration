@@ -4,8 +4,9 @@
             "home": {
                 "title": "List of doctors"
             },
-            "firstName": "firstName",
-            "lastName": "lastName"
+            "loginDoctor": "Doctor",
+            "firstName": "First name",
+            "lastName": "Last name"
         }
     }
 }

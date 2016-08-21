@@ -46,7 +46,7 @@
         },
         "messages": {
             "info": {
-                "authenticated": "If you want to <a class=\"alert-link\" href=\"#/login\">sign in</a>, you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\").",
+                "authenticated": "If you want to <a class=\"alert-link\" href=\"#/login\">sign in</a>, you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\")  <br/>- User (login=\"user1\" and password=\"user1\") <br/>- User (login=\"user2\" and password=\"user2\") <br/>- User (login=\"user3\" and password=\"user3\") <br/>- User (login=\"doctor1\" and password=\"doctor1\") <br/>- User (login=\"doctor2\" and password=\"doctor2\") <br/>- User (login=\"doctor3\" and password=\"doctor3\").",
                 "register": "You don't have an account yet? <a class=\"alert-link\" href=\"#/register\">Register a new account</a>"
             },
             "error": {
